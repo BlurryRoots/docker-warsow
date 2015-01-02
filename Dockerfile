@@ -6,16 +6,17 @@ RUN apt-get update
 RUN apt-get install wget libcurl3 libcurl3-gnutls -y
 
 # Install game from warsow.net
-RUN wget -O warsow_1.02_unified.tar.gz http://www.warsow.net/download?dl=linux102
-RUN tar zxvf warsow_1.02_unified.tar.gz -C /opt/
-RUN chmod +x /opt/warsow_1.02/wsw_server*
+RUN wget -O warsow.tar.gz http://www.warsow.net/download?dl=linux151
+RUN tar zxvf warsow.tar.gz -C /opt/
+RUN mv /opt/warsow* /opt/Warsow
+RUN chmod +x /opt/Warsow/wsw_server*
 
 # Setup user
 RUN useradd -m -s /bin/bash warsow
-RUN chown -R warsow:warsow /opt/warsow_1.02
+RUN chown -R warsow:warsow /opt/Warsow
 
 # Setup server
-WORKDIR /opt/warsow_1.02
+WORKDIR /opt/Warsow
 USER warsow
 EXPOSE 44401/udp
 
