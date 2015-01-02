@@ -1,4 +1,4 @@
-FROM ubuntu:13.10
+FROM ubuntu:14.04
 MAINTAINER Tim Sogard <docker@timsogard.com>
 
 ADD cfg /opt/wsw_cfg/
@@ -6,8 +6,8 @@ RUN apt-get update
 RUN apt-get install wget libcurl3 libcurl3-gnutls -y
 
 # Install game from warsow.net
-RUN wget -O warsow.tar.gz http://www.warsow.net/download?dl=linux151
-RUN tar zxvf warsow.tar.gz -C /opt/
+RUN wget "http://www.warsow.net/download?dl=warsow151" -O warsow.tar.gz
+RUN tar -xzf warsow.tar.gz -C /opt/
 RUN mv /opt/warsow* /opt/Warsow
 RUN chmod +x /opt/Warsow/wsw_server*
 
