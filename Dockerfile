@@ -1,7 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER Tim Sogard <docker@timsogard.com>
 
-ADD cfg /opt/wsw_cfg/
 RUN apt-get update
 RUN apt-get install wget libcurl3 libcurl3-gnutls -y
 
@@ -16,8 +15,9 @@ RUN useradd -m -s /bin/bash warsow
 RUN chown -R warsow:warsow /opt/Warsow
 
 # Setup server
+ADD cfg/dedicated_autoexec.cfg /opt/Warsow/basewsw/dedicated_autoexec.cfg
 WORKDIR /opt/Warsow
 USER warsow
 EXPOSE 44401/udp
 
-CMD ./wsw_server +set fs_usehomedir 0 +set fs_basepath /opt/warsow_1.02/ +set dedicated 1
+CMD ./wsw_server +set fs_usehomedir 0 +set fs_basepath /opt/Warsow +set dedicated 1
